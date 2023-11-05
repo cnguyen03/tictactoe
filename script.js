@@ -113,6 +113,8 @@ function handleRestartGame() {
     statusDisplay.innerHTML = currentPlayerTurn;
     document.querySelectorAll('.cell')
         .forEach(cell => cell.innerHTML = "");
+    statusDisplay.innerHTML = currentPlayerTurn();
+
 }
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
 document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
