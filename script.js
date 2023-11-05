@@ -3,12 +3,16 @@ We store our game status element here to allow us to more easily
 use it later on 
 */
 const statusDisplay = document.querySelector('.game--status');
+const easterEggDisplay = document.querySelector('.game--easteregg')
 let gameActive = true;
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+const easterEggMessage1 = () => `Hey, stop clicking me! Let ${currentPlayer} move!`;
+const easterEggMesssage2 = () => `Iris is the best girlfriend ever!`;
+let clickCount = 0;
 /*
 We set the inital message to let the players know whose turn it is
 */
@@ -82,6 +86,8 @@ function handleResultValidation() {
 }
 
 function handleCellClick(clickedCellEvent) {
+    clickCount = 0;
+    easterEggDisplay.innerHTML = "";
     /*
     We will save the clicked html element in a variable for easier further use
     */
@@ -107,6 +113,7 @@ function handleCellClick(clickedCellEvent) {
 }
 
 function handleRestartGame() {
+    clickCount++;
     gameActive = true;
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
@@ -114,7 +121,11 @@ function handleRestartGame() {
     document.querySelectorAll('.cell')
         .forEach(cell => cell.innerHTML = "");
     statusDisplay.innerHTML = currentPlayerTurn();
-
+    if (clickCount == 5) {
+        easterEggDisplay.innerHTML = easterEggMessage1();
+    } else if (clickCount == 10) {
+        easterEggDisplay.innerHTML = easterEggMesssage2();
+    }
 }
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
 document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
