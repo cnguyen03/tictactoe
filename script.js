@@ -27,6 +27,7 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
     handleResultValidation();
 }
 function handlePlayerChange() {
+    // player change
     if (currentPlayer == "X") {
         currentPlayer = "O";
     } else {
